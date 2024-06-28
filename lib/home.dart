@@ -44,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // ProfileScreen
       color: Colors.green,
     ),
-    Settings(),
+    const Settings(),
   ];
 
   int tab = 0;
