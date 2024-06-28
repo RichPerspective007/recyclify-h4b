@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:recyclify/components/device_list.dart';
+import 'models/device_categories.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -33,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   final pages = [
-    HomeScreen(),
+    DeviceListView(devicelist: devices),
     Container( //DonationsScreen
       color: Colors.blue,
     ),
