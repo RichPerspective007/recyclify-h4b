@@ -4,15 +4,26 @@ import 'package:recyclify/components/device_list.dart';
 import 'package:recyclify/components/donationscreen.dart';
 import 'package:recyclify/components/profilescreen.dart';
 import 'package:recyclify/components/settings.dart';
+import 'package:recyclify/models/colors.dart';
 import 'package:recyclify/services/database.dart';
 import 'models/device_categories.dart';
 import 'services/auth_service.dart';
 import 'services/alert_service.dart';
 import 'services/navigation_service.dart';
+import 'components/theme_button.dart'; 
+import 'components/color_button.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({
+    Key? key,
+    required this.changeTheme,
+    required this.changeColor,
+    required this.colorSelected,
+  }) : super(key: key);
 
+  final void Function(bool useLightMode) changeTheme;
+  final void Function(int value) changeColor;
+  final ColorSelection colorSelected;
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -72,6 +83,13 @@ class _HomeScreenState extends State<HomeScreen> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         actions: [
+          ThemeButton(
+            changeThemeMode: widget.changeTheme,
+          ),
+          ColorButton(
+            changeColor: widget.changeColor,
+            colorSelected: widget.colorSelected,
+          ),
           IconButton(
             onPressed: () async {
               bool result = await _authService.logout();

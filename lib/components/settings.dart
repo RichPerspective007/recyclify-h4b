@@ -18,7 +18,7 @@ class Settings extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
+            Navigator.pushNamed(context, '/home');
           },
           icon: Icon(Icons.arrow_back_ios),
         ),

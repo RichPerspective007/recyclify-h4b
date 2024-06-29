@@ -11,7 +11,7 @@ class NavigationService {
   {
     "/login": (context) => LoginPage(),
     "/register": (context) => RegisterPage(),
-     "/home": (context) => HomeScreen(),
+     //"/home": (context) => HomeScreen(),
      "/settings": (context) => Settings(),
 
      

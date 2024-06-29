@@ -17,12 +17,12 @@ class _ProfilePageState extends State<Profilescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
+      //ackgroundColor: Colors.grey[300],
       appBar: AppBar(
-        title: Center(child: Text("P R O F I L E",
-        style: TextStyle(fontSize: 25),)),
-        backgroundColor: Colors.grey[900],
-        titleTextStyle: TextStyle(color: Colors.white),
+        title: Center(child: Text("Profile",
+        style: Theme.of(context).textTheme.titleLarge,)),
+        //backgroundColor: Colors.grey[900],
+        //titleTextStyle: TextStyle(color: Colors.white),
       ),
       body: ListView(
         children: [

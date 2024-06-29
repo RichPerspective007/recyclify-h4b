@@ -197,7 +197,7 @@ class _LoginPageState extends State<LoginPage> {
             if (_loginFormKey.currentState?.validate() ?? false) {
               _loginFormKey.currentState?.save();
               bool result = await _authService.login(email!, password!);
-              print(result);
+              print('Result = {result}');
               if (result) {
                 _navigationService.pushReplacementNamed('/home');
               } else {

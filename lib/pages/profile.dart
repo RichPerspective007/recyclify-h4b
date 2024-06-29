@@ -17,11 +17,9 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         title: Text("PETER SORCAR"),
-        backgroundColor: Colors.grey[900],
-        titleTextStyle: TextStyle(color: Colors.white),
+        //titleTextStyle: TextStyle(color: Colors.white),
         actions: [Padding(
           padding: const EdgeInsets.all(12),
           child: Icon(Icons.logout),
@@ -40,7 +38,7 @@ class _ProfilePageState extends State<ProfilePage> {
             "Normal Name",
             //
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.grey[700]),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
           const SizedBox(height: 50),
           Padding(

@@ -13,6 +13,7 @@ import 'package:recyclify/services/navigation_service.dart';
 import 'package:recyclify/utils.dart'; 
 import 'models/colors.dart';
 
+
 void main() async {
   await setup();
   runApp(
@@ -26,22 +27,44 @@ Future<void> setup() async {
   await registerServices();
 }
 
-class MyApp extends StatelessWidget {
-  final GetIt _getIt = GetIt.instance;
+class MyApp extends StatefulWidget {
   late NavigationService _navigationService;
   late AuthService _authService;
-  ThemeMode themeMode = ThemeMode.light; // Manual theme toggle
-  ColorSelection colorSelected = ColorSelection.pink;
+  final GetIt _getIt = GetIt.instance;
+
   MyApp({super.key}) {
     _navigationService = _getIt.get<NavigationService>();
     _authService = _getIt.get<AuthService>();
   }
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  ThemeMode themeMode = ThemeMode.light; 
+ // Manual theme toggle
+  ColorSelection colorSelected = ColorSelection.pink;
+
+  void changeThemeMode(bool useLightMode) {
+    setState(() {
+      themeMode = useLightMode
+      ? ThemeMode.light 
+      : ThemeMode.dark;
+    });
+  } 
+  void changeColor(int value) {
+    setState(() {
+      colorSelected = ColorSelection.values[value];
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      navigatorKey: _navigationService.navigatorKey,
+      navigatorKey: widget._navigationService.navigatorKey,
       title: 'Flutter Demo',
       themeMode: themeMode,
       theme: ThemeData(
@@ -55,10 +78,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         brightness: Brightness.dark,
       ),
-      initialRoute: _authService.user != null ? "/home": "/login", 
+      initialRoute: widget._authService.user != null ? "/home": "/login", 
       routes: {
         "/login": (context) => LoginPage(),
-        "/home": (context) => HomeScreen(),
+        "/home": (context) => HomeScreen(changeTheme: changeThemeMode,changeColor: changeColor,colorSelected: colorSelected,),
         "/register": (context) => RegisterPage(),
         "/settings": (context) => Settings(),
         '/date_time': (context) => Date_Time(), 
