@@ -4,12 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:recyclify/components/settings.dart';
 import 'package:recyclify/home.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:recyclify/pages/date&time.dart';
 import 'package:recyclify/pages/login_page.dart';
 import 'package:recyclify/pages/register_page.dart';
 import 'package:recyclify/services/database.dart';
-import 'package:recyclify/services/auth_service.dart'; 
+import 'package:recyclify/services/auth_service.dart';
 import 'package:recyclify/services/navigation_service.dart';
-import 'package:recyclify/utils.dart'; 
+import 'package:recyclify/utils.dart';
 
 void main() async {
   await setup();
@@ -43,13 +44,18 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.montserratTextTheme(),
       ),
-      initialRoute: _authService.user != null ? "/home": "/login", 
+      initialRoute: _authService.user != null ? "/home" : "/login",
       routes: {
         "/login": (context) => LoginPage(),
         "/home": (context) => HomeScreen(),
         "/register": (context) => RegisterPage(),
         "/settings": (context) => Settings(),
+        '/date_time': (context) => Date_Time(), 
       }, // Add this
     );
   }
+
+
+
+  
 }
