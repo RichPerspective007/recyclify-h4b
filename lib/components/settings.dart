@@ -4,7 +4,7 @@ import 'package:recyclify/pages/account.dart';
 import 'package:recyclify/pages/date&time.dart';
 import 'package:recyclify/pages/language.dart';
 import 'package:recyclify/pages/term.dart';
-import 'package:recyclify/theme/theme.dart';
+
 
 
 class Settings extends StatelessWidget {
@@ -75,23 +75,7 @@ class Settings extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Consumer<ThemeProvider>(
-                builder: (context, themeProvider, _) => ListTile(
-                  leading: Icon(Icons.palette),
-                  title: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        _showThemeDialog(context, themeProvider);
-                      },
-                      child: Text(
-                        "THEME",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              
               Padding(
                 padding: const EdgeInsets.only(right: 120),
                 child: Text(
@@ -161,33 +145,5 @@ class Settings extends StatelessWidget {
     );
   }
 
-  void _showThemeDialog(BuildContext context, ThemeProvider themeProvider) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Select Theme"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                title: Text("Light Theme"),
-                onTap: () {
-                  themeProvider.setTheme(AppTheme.Light);
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text("Dark Theme"),
-                onTap: () {
-                  themeProvider.setTheme(AppTheme.Dark);
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
-  }
+  
 }
