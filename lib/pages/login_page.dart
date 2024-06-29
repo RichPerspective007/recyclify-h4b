@@ -1,6 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recyclify/components/forgotpassword.dart';
 import 'package:recyclify/services/alert_service.dart';
 import 'package:recyclify/services/auth_service.dart';
 import 'package:recyclify/services/navigation_service.dart';
@@ -176,6 +179,26 @@ class _LoginPageState extends State<LoginPage> {
 
                     SizedBox(height: 40),
                     _loginButton(),
+                    SizedBox(height: 20),
+                    Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)
+                          {
+                            return ForgotPassword(); 
+                          }));
+                        },
+                        child: const Text(
+                          "F O R G O T   P A S S W O R D",
+                          style: TextStyle(
+                            color: Colors.yellow,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                   ],
                 ),
               ),
@@ -221,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
+  
   Widget _createAnAccountLink() {
     return Center(
       child: Row(
