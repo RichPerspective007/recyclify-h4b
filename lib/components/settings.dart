@@ -1,19 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart'; // Import provider package
 import 'package:recyclify/pages/account.dart';
 import 'package:recyclify/pages/date&time.dart';
 import 'package:recyclify/pages/language.dart';
 import 'package:recyclify/pages/term.dart';
+import 'package:recyclify/theme/theme.dart';
 
-class Settings extends StatefulWidget {
+
+class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
 
-  @override
-  State<Settings> createState() => _SettingsState();
-}
-
-class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +23,7 @@ class _SettingsState extends State<Settings> {
         leadingWidth: 100, // Adjust width as needed
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,29 +33,30 @@ class _SettingsState extends State<Settings> {
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 40),
-                  ListTile(
-                    leading: Icon(Icons.person,size: 30),
-                    title: Padding(
-                      padding: EdgeInsets.only(left:10),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Account()));
-                        },
-                        child: Text("ACCOUNT",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold
-                        ),),
-                      ),
+              ListTile(
+                leading: Icon(Icons.person, size: 30),
+                title: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Account()));
+                    },
+                    child: Text(
+                      "ACCOUNT",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
+                  ),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(right: 60),
-                child: Text("PERSONAL INFO",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey,
-                ),),
+                child: Text(
+                  "PERSONAL INFO",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                ),
               ),
               SizedBox(height: 20),
               ListTile(
@@ -67,15 +64,39 @@ class _SettingsState extends State<Settings> {
                 title: Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Languages()));
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Languages()));
                     },
-                    child: Text("LANGUAGE",
-                    style: TextStyle(
-                      fontSize: 20,
-                          fontWeight: FontWeight.bold
-                    ),),
+                    child: Text(
+                      "LANGUAGE",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Consumer<ThemeProvider>(
+                builder: (context, themeProvider, _) => ListTile(
+                  leading: Icon(Icons.palette),
+                  title: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: GestureDetector(
+                      onTap: () {
+                        _showThemeDialog(context, themeProvider);
+                      },
+                      child: Text(
+                        "THEME",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 120),
+                child: Text(
+                  "ENGLISH",
+                  style: TextStyle(color: Colors.grey, fontSize: 16),
                 ),
               ),
               SizedBox(height: 20),
@@ -84,63 +105,89 @@ class _SettingsState extends State<Settings> {
                 title: Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Date_Time()));
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Date_Time()));
                     },
-                    child: Text("DATE & TIME",
-                    style: TextStyle(
-                      fontSize: 20,
-                          fontWeight: FontWeight.bold
-                    ),),
+                    child: Text(
+                      "DATE & TIME",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
-              ),     
+              ),
               SizedBox(height: 20),
               ListTile(
                 leading: Icon(Icons.book),
                 title: Padding(
                   padding: EdgeInsets.only(left: 10),
                   child: GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>Terms()));
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Terms()));
                     },
-                    child: Text("TERMS AND CONDITIONS",
-                    style: TextStyle(
-                      fontSize: 20,
-                          fontWeight: FontWeight.bold
-                    ),),
+                    child: Text(
+                      "TERMS AND CONDITIONS",
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
-              ),               
+              ),
               SizedBox(height: 20),
               ListTile(
                 leading: Icon(Icons.logout),
                 title: Padding(
                   padding: EdgeInsets.only(left: 10),
-                  child: Text("LOG OUT",
-                  style: TextStyle(
-                    fontSize: 20,
-                        fontWeight: FontWeight.bold
-                  ),),
+                  child: Text(
+                    "LOG OUT",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
               SizedBox(height: 20),
               ListTile(
                 leading: Icon(Icons.delete),
                 title: Padding(
-                  padding: EdgeInsets.only(left: 10
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text(
+                    "DELETE ACCOUNT",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  child: Text("DELETE ACCOUNT",
-                  style: TextStyle(
-                    fontSize: 20,
-                        fontWeight: FontWeight.bold
-                  ),),
                 ),
-              ),      // Add more settings widgets as needed
+              ),
+              SizedBox(height: 20),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _showThemeDialog(BuildContext context, ThemeProvider themeProvider) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Select Theme"),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                title: Text("Light Theme"),
+                onTap: () {
+                  themeProvider.setTheme(AppTheme.Light);
+                  Navigator.pop(context);
+                },
+              ),
+              ListTile(
+                title: Text("Dark Theme"),
+                onTap: () {
+                  themeProvider.setTheme(AppTheme.Dark);
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
