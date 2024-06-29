@@ -11,7 +11,19 @@ Recyclify is a green technology application designed to streamline the process o
 
 ## Uniqueness and Innovation
 
-- **
+- **Donation to school and NGOs:** By partnering with schools and NGOs to donate functional electronics to underprivelaged students and communities.
+
+- **Gamification System:** By creating a gamified experience where user can achieve points based on their recycling and donation activities.
+
+- **Special Customers:** Are those who can propagate this drive and will be recognized and special and be celebrated and be gifted special premium features for free.
+
+- **Real-Time Pick-Up Tracking:** Where we offer real-time tracking mechanisms for pick-up services enhancing reliability.
+
+- **Free and Fair for All:** So that the customer receives the best fair value which the seller gives so that there will be no disparity among them.
+
+- **Data Security:** Where we will ensure data security and privacy by offering certified data wiping services before recycling or donating devices.
+
+- **Environmental Impacts Reports and Carbon Footprint Calculator:** To make our viewers aware about the environment and spread the awareness by celebrating their achivements which will propagate the positive mindset of sustainibility of environment for a better future.
 
 ## Technologies Used
 
