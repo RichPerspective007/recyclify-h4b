@@ -53,7 +53,7 @@ class _ProfilePageState extends State<Profilescreen> {
             onPressed: () => editField('username'),
           ),
           MyTextBox(
-            text: 'BOU DORKAR',
+            text: 'part time vigilante in dharmatala-ballygunge',
             sectionName: 'bio',
             onPressed: () => editField('bio'),
           )
