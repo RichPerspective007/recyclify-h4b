@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:recyclify/components/device_list.dart';
 import 'package:recyclify/components/settings.dart';
+import 'package:recyclify/services/database.dart';
 import 'models/device_categories.dart';
+import 'services/auth_service.dart';
+import 'services/alert_service.dart';
+import 'services/navigation_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,6 +16,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  AuthService _authService = AuthService();
+  AlertService _alertService = AlertService();
+  GetIt _getIt = GetIt.instance;
+  
+  
+  NavigationService _navigationService = NavigationService();
+
+
+  @override
+  void initState() {
+    super.initState();
+    _authService = _getIt.get<AuthService>();
+    _navigationService = _getIt.get<NavigationService>();
+    _alertService = _getIt.get<AlertService>();
+    
+  }
+
+
   List<NavigationDestination> navBarDestinations = [
     NavigationDestination(
       icon: Icon(Icons.home_outlined),
@@ -48,6 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   int tab = 0;
+  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,6 +81,21 @@ class _HomeScreenState extends State<HomeScreen> {
           'ReCyclify',
           style: Theme.of(context).textTheme.titleLarge,
         ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              bool result = await _authService.logout();
+              if (result) {
+                _alertService.showToast(
+                  text: "Logged Out!",
+                  icon: Icons.check_circle,
+                );
+                _navigationService.pushReplacementNamed('/login');
+              }
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ),
       body: IndexedStack(
         index: tab,
