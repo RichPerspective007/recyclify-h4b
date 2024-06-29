@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recyclify/components/device_list.dart';
 import 'package:recyclify/components/settings.dart';
 import 'models/device_categories.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -10,7 +11,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   List<NavigationDestination> navBarDestinations = [
     NavigationDestination(
       icon: Icon(Icons.home_outlined),
@@ -36,13 +36,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final pages = [
     DeviceListView(devicelist: devices),
-    Container( //DonationsScreen
+    Container(
+      //DonationsScreen
       color: Colors.blue,
     ),
-    Container( // ProfileScreen
+    Container(
+      // ProfileScreen
       color: Colors.green,
     ),
-    Settings(),
+    const Settings(),
   ];
 
   int tab = 0;
@@ -50,7 +52,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('rEcyclify', style: Theme.of(context).textTheme.titleLarge,),
+        title: Text(
+          'ReCyclify',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
       body: IndexedStack(
         index: tab,
@@ -60,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedIndex: tab,
         animationDuration: const Duration(milliseconds: 1000),
         onDestinationSelected: (index) {
-          setState((){
+          setState(() {
             tab = index;
           });
         },

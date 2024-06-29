@@ -12,7 +12,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(onPressed: (){},icon:Icon(
-
+          Icons.person,
         ),
       ),
       ),
