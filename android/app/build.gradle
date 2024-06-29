@@ -46,10 +46,15 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
+        minSdkVersion 23                                                                            
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }
+
+    dependencies {
+    implementation 'com.google.firebase:firebase-appcheck-playintegrity:16.0.0'
+}
 
     buildTypes {
         release {
