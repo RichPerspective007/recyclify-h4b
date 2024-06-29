@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import provider package
+import 'package:recyclify/home.dart';
 import 'package:recyclify/pages/account.dart';
 import 'package:recyclify/pages/date&time.dart';
 import 'package:recyclify/pages/language.dart';
+import 'package:recyclify/pages/profile.dart';
 import 'package:recyclify/pages/term.dart';
-import 'package:recyclify/theme/theme.dart';
-
-
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
 
@@ -16,7 +15,7 @@ class Settings extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
           },
           icon: Icon(Icons.arrow_back_ios),
         ),
@@ -39,7 +38,7 @@ class Settings extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Account()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
                     },
                     child: Text(
                       "ACCOUNT",
@@ -70,24 +69,6 @@ class Settings extends StatelessWidget {
                     child: Text(
                       "LANGUAGE",
                       style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 20),
-              Consumer<ThemeProvider>(
-                builder: (context, themeProvider, _) => ListTile(
-                  leading: Icon(Icons.palette),
-                  title: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: GestureDetector(
-                      onTap: () {
-                        _showThemeDialog(context, themeProvider);
-                      },
-                      child: Text(
-                        "THEME",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
                     ),
                   ),
                 ),
@@ -160,34 +141,4 @@ class Settings extends StatelessWidget {
       ),
     );
   }
-
-  void _showThemeDialog(BuildContext context, ThemeProvider themeProvider) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text("Select Theme"),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                title: Text("Light Theme"),
-                onTap: () {
-                  themeProvider.setTheme(AppTheme.Light);
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text("Dark Theme"),
-                onTap: () {
-                  themeProvider.setTheme(AppTheme.Dark);
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          ),
-        );
-      },
-    );
   }
-}
