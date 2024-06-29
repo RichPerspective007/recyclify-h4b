@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // Import provider package
+import 'package:recyclify/home.dart';
 import 'package:recyclify/pages/account.dart';
 import 'package:recyclify/pages/date&time.dart';
 import 'package:recyclify/pages/language.dart';
+import 'package:recyclify/pages/profile.dart';
 import 'package:recyclify/pages/term.dart';
+<<<<<<< HEAD
+=======
 
 
 
+>>>>>>> 319586c5900bb85ca013f45137d57fc1ff493fad
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
 
@@ -16,7 +21,7 @@ class Settings extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
           },
           icon: Icon(Icons.arrow_back_ios),
         ),
@@ -39,7 +44,7 @@ class Settings extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10),
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Account()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
                     },
                     child: Text(
                       "ACCOUNT",
@@ -74,8 +79,11 @@ class Settings extends StatelessWidget {
                   ),
                 ),
               ),
+<<<<<<< HEAD
+=======
               SizedBox(height: 20),
               
+>>>>>>> 319586c5900bb85ca013f45137d57fc1ff493fad
               Padding(
                 padding: const EdgeInsets.only(right: 120),
                 child: Text(
@@ -144,6 +152,10 @@ class Settings extends StatelessWidget {
       ),
     );
   }
+<<<<<<< HEAD
+  }
+=======
 
   
 }
+>>>>>>> 319586c5900bb85ca013f45137d57fc1ff493fad
