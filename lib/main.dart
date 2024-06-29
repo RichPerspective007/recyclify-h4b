@@ -11,6 +11,7 @@ import 'package:recyclify/services/database.dart';
 import 'package:recyclify/services/auth_service.dart'; 
 import 'package:recyclify/services/navigation_service.dart';
 import 'package:recyclify/utils.dart'; 
+import 'models/colors.dart';
 
 void main() async {
   await setup();
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
   final GetIt _getIt = GetIt.instance;
   late NavigationService _navigationService;
   late AuthService _authService;
+  ThemeMode themeMode = ThemeMode.light; // Manual theme toggle
+  ColorSelection colorSelected = ColorSelection.pink;
   MyApp({super.key}) {
     _navigationService = _getIt.get<NavigationService>();
     _authService = _getIt.get<AuthService>();
@@ -40,9 +43,17 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorKey: _navigationService.navigatorKey,
       title: 'Flutter Demo',
+      themeMode: themeMode,
       theme: ThemeData(
+        colorSchemeSeed: colorSelected.color,
         useMaterial3: true,
         textTheme: GoogleFonts.montserratTextTheme(),
+        brightness: Brightness.light,
+      ),
+      darkTheme: ThemeData(
+        colorSchemeSeed: colorSelected.color,
+        useMaterial3: true,
+        brightness: Brightness.dark,
       ),
       initialRoute: _authService.user != null ? "/home": "/login", 
       routes: {

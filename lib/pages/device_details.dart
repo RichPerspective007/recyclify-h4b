@@ -19,7 +19,7 @@ class _DeviceDetailslFormState extends State<DeviceDetailslForm> {
   @override
   Widget build(BuildContext context) {
     Widget formType = (widget.device.device_id % 8 == 0 || widget.device.device_id % 8 == 1)
-    ?PhoneTabForm():(widget.device.device_id % 8 == 2 || widget.device.device_id % 8 == 3)?LapDeskForm();
+    ?PhoneTabForm():(widget.device.device_id % 8 == 2 || widget.device.device_id % 8 == 3)?LapDeskForm():LapDeskForm();
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(

@@ -56,8 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final pages = [
     DeviceListView(devicelist: devices),
-    DonationsScreen(),
-    Profilescreen(),
+    const DonationsScreen(),
+    const Profilescreen(),
     const Settings(),
   ];
 
