@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Settings extends StatefulWidget {
@@ -20,25 +21,91 @@ class _SettingsState extends State<Settings> {
         ),
         leadingWidth: 100, // Adjust width as needed
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "SETTINGS",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 40),
-            Text(
-              "ACCOUNT",
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w500,
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "SETTINGS",
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-            ),
-            // Add more settings widgets as needed
-          ],
+              SizedBox(height: 40),
+                  ListTile(
+                    leading: Icon(Icons.person,size: 30),
+                    title: Padding(
+                      padding: EdgeInsets.only(left:10),
+                      child: Text("ACCOUNT",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold
+                      ),),
+                    ),
+              ),
+              SizedBox(height: 20),
+              ListTile(
+                leading: Icon(Icons.language),
+                title: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text("LANGUAGE",
+                  style: TextStyle(
+                    fontSize: 20,
+                        fontWeight: FontWeight.bold
+                  ),),
+                ),
+              ),
+              SizedBox(height: 20),
+              ListTile(
+                leading: Icon(Icons.calendar_today),
+                title: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text("DATE & TIME",
+                  style: TextStyle(
+                    fontSize: 20,
+                        fontWeight: FontWeight.bold
+                  ),),
+                ),
+              ),     
+              SizedBox(height: 20),
+              ListTile(
+                leading: Icon(Icons.book),
+                title: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text("TERMS AND CONDITIONS",
+                  style: TextStyle(
+                    fontSize: 20,
+                        fontWeight: FontWeight.bold
+                  ),),
+                ),
+              ),               
+              SizedBox(height: 20),
+              ListTile(
+                leading: Icon(Icons.logout),
+                title: Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child: Text("LOG OUT",
+                  style: TextStyle(
+                    fontSize: 20,
+                        fontWeight: FontWeight.bold
+                  ),),
+                ),
+              ),
+              SizedBox(height: 20),
+              ListTile(
+                leading: Icon(Icons.delete),
+                title: Padding(
+                  padding: EdgeInsets.only(left: 10
+                  ),
+                  child: Text("DELETE ACCOUNT",
+                  style: TextStyle(
+                    fontSize: 20,
+                        fontWeight: FontWeight.bold
+                  ),),
+                ),
+              ),      // Add more settings widgets as needed
+            ],
+          ),
         ),
       ),
     );
