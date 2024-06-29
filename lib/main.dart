@@ -4,15 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:recyclify/components/settings.dart';
 import 'package:recyclify/home.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:recyclify/models/colors.dart';
 import 'package:recyclify/pages/date&time.dart';
 import 'package:recyclify/pages/login_page.dart';
 import 'package:recyclify/pages/register_page.dart';
 import 'package:recyclify/services/database.dart';
-import 'package:recyclify/services/auth_service.dart'; 
+import 'package:recyclify/services/auth_service.dart';
 import 'package:recyclify/services/navigation_service.dart';
-import 'package:recyclify/utils.dart'; 
-import 'models/colors.dart';
-
+import 'package:recyclify/utils.dart';
 
 void main() async {
   await setup();

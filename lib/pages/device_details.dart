@@ -16,25 +16,34 @@ class DeviceDetailslForm extends StatefulWidget {
 
 class _DeviceDetailslFormState extends State<DeviceDetailslForm> {
   final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    Widget formType = (widget.device.device_id % 8 == 0 || widget.device.device_id % 8 == 1)
-    ?PhoneTabForm():(widget.device.device_id % 8 == 2 || widget.device.device_id % 8 == 3)?LapDeskForm():LapDeskForm();
+    Widget formType;
+    if (widget.device.device_id % 8 == 0 || widget.device.device_id % 8 == 1) {
+      formType = const PhoneTabForm();
+    } else if (widget.device.device_id % 8 == 2 || widget.device.device_id % 8 == 3) {
+      formType = const LapDeskForm();
+    } else {
+      // handle other cases
+      formType = const Text('Unknown device type');
+    }
+
     return Scaffold(
       appBar: AppBar(
         leading: GestureDetector(
           onTap: () => Navigator.pop(context),
-          child: Icon(Icons.arrow_back)),
-         centerTitle: true,
-         title: Text('${widget.device.type} Details', style: Theme.of(context).textTheme.titleLarge,),
+          child: const Icon(Icons.arrow_back)),
+        centerTitle: true,
+        title: Text('${widget.device.type} Details', style: Theme.of(context).textTheme.titleLarge,),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Form(
           key: _formKey,
           child: formType,
-          )
         ),
-      );
+      ),
+    );
   }
 }
