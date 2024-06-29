@@ -9,7 +9,6 @@ import 'package:recyclify/pages/profile.dart';
 import 'package:recyclify/pages/term.dart';
 
 
-
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
 
@@ -77,7 +76,6 @@ class Settings extends StatelessWidget {
                   ),
                 ),
               ),
-
               SizedBox(height: 20),
               
 
@@ -155,6 +153,6 @@ class Settings extends StatelessWidget {
     );
   }
 
-  }
 
+  }
 

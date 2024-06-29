@@ -8,9 +8,9 @@ import 'package:recyclify/pages/date&time.dart';
 import 'package:recyclify/pages/login_page.dart';
 import 'package:recyclify/pages/register_page.dart';
 import 'package:recyclify/services/database.dart';
-import 'package:recyclify/services/auth_service.dart'; 
+import 'package:recyclify/services/auth_service.dart';
 import 'package:recyclify/services/navigation_service.dart';
-import 'package:recyclify/utils.dart'; 
+import 'package:recyclify/utils.dart';
 
 void main() async {
   await setup();
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.montserratTextTheme(),
       ),
-      initialRoute: _authService.user != null ? "/home": "/login", 
+      initialRoute: _authService.user != null ? "/home" : "/login",
       routes: {
         "/login": (context) => LoginPage(),
         "/home": (context) => HomeScreen(),
