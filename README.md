@@ -9,9 +9,13 @@ Recyclify is a green technology application designed to streamline the process o
 - **Sustainability Tips:** Get tips on how to reduce electronic waste.
 - **Analytics:** Track user engagement and app performance using Firebase Analytics.
 
+## Uniqueness and Innovation
+
+- **
+
 ## Technologies Used
 
-- **Google Flutter:** Frontend framework for building cross-platform mobile applications.
+- **Flutter:** Frontend framework for building cross-platform mobile applications.
 - **Cloud Firestore:** Backend NoSQL database for storing recycling center locations and user data.
 - **Firebase Analytics:** Service to track user engagement and app performance.
 
@@ -19,8 +23,10 @@ Recyclify is a green technology application designed to streamline the process o
 
 - **Firebase Storage Database:**  to store user data in an organized database specifying users and their data.
 
-
-
+![Dart](https://img.shields.io/badge/Dart-121212?style=for-the-badge&logo=dart&logoColor=cyan)
+![Flutter](https://img.shields.io/badge/Flutter-121212?style=for-the-badge&logo=flutter&logoColor=cyan)
+![Firebase](https://img.shields.io/badge/Firebase-121212?style=for-the-badge&logo=firebase&logoColor=yellow)
+![GoogleCloud](https://img.shields.io/badge/GoogleCloud-121212?style=for-the-badge&logo=googlecloud&logoColor=white)
 ## Getting Started
 
 ### Prerequisites
