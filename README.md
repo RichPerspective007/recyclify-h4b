@@ -7,10 +7,10 @@ Sure! Here is the updated README with the "Release" section included:
 Recyclify is a green technology application designed to streamline the process of recycling electronics. By using Cloud Firestore and Firebase Analytics, Recyclify helps users find recycling centers, track their recycling activities, and promote sustainable practices.
 
 ## Contributors
-- [Anurag Bhattacharjee](https://github.com/anuragbhattacharjee)
-- [Promit Chaudhuri](https://github.com/promitchaudhuri)
-- [Shivaditya Bhattacharya](https://github.com/shivadityabhattacharya)
-- [Sankhadeep Bhowmick](https://github.com/sankhadeepbhowmick)
+- [Anurag Bhattacharjee](https://github.com/AnuOdinson117)
+- [Promit Chaudhuri](https://github.com/ProSkywalker16)
+- [Shivaditya Bhattacharya](https://github.com/RichPerspective007)
+- [Sankhadeep Bhowmick](https://github.com/Sankhadeep-Bhowmik)
 
 ## Features
 - **Find Recycling Centers**: Locate nearby electronics recycling centers.
