@@ -91,6 +91,8 @@ class _LoginPageState extends State<LoginPage> {
             _headerText(),
             _loginForm(),
             _createAnAccountLink(),
+            SizedBox(height: 10,),
+             _forgotPassword(),
           ],
         ),
       ),
@@ -179,26 +181,8 @@ class _LoginPageState extends State<LoginPage> {
 
                     SizedBox(height: 40),
                     _loginButton(),
-                    SizedBox(height: 20),
-                    Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)
-                          {
-                            return ForgotPassword(); 
-                          }));
-                        },
-                        child: const Text(
-                          "F O R G O T   P A S S W O R D",
-                          style: TextStyle(
-                            color: Colors.yellow,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    //SizedBox(height: 20),
+                    
                   ],
                 ),
               ),
@@ -244,7 +228,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-  
+
   Widget _createAnAccountLink() {
     return Center(
       child: Row(
@@ -261,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
           GestureDetector(
-            onTap:(){
+            onTap: () {
               _navigationService.pushReplacementNamed('/register');
             },
             child: Text(
@@ -273,6 +257,29 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           )
+        ],
+      ),
+    );
+  }
+
+  Widget _forgotPassword() {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ForgotPassword();
+              }));
+            },
+            child: const Text(
+              "F O R G O T   P A S S W O R D?",
+              style: TextStyle(
+                color: Colors.yellow,
+              ),
+            ),
+          ),
         ],
       ),
     );
