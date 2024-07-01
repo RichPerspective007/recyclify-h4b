@@ -1,4 +1,4 @@
-Here's the updated README formatted correctly:
+Sure! Here is the updated README with the "Release" section included:
 
 ---
 
@@ -6,11 +6,11 @@ Here's the updated README formatted correctly:
 
 Recyclify is a green technology application designed to streamline the process of recycling electronics. By using Cloud Firestore and Firebase Analytics, Recyclify helps users find recycling centers, track their recycling activities, and promote sustainable practices.
 
-## Developed at Hack4Bengal 3.0 by:
-- [Anurag Bhattacharjee](https://github.com/AnuOdinson117)
-- [Promit Chaudhuri](https://github.com/ProSkywalker16)
-- [Shivaditya Bhattacharya](https://github.com/RichPerspective007)
-- [Sankhadeep Bhowmick](https://github.com/Sankhadeep-Bhowmik)
+## Contributors
+- [Anurag Bhattacharjee](https://github.com/anuragbhattacharjee)
+- [Promit Chaudhuri](https://github.com/promitchaudhuri)
+- [Shivaditya Bhattacharya](https://github.com/shivadityabhattacharya)
+- [Sankhadeep Bhowmick](https://github.com/sankhadeepbhowmick)
 
 ## Features
 - **Find Recycling Centers**: Locate nearby electronics recycling centers.
@@ -108,6 +108,9 @@ Before you begin, ensure you have the following installed:
   - **models/**: Contains data models
   - **widgets/**: Contains reusable widgets
 
+## Release
+You can find the latest release of Recyclify on our [Releases page](https://github.com/RichPerspective007/recyclify-h4b/releases).
+
 ## Contribution
 We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) for more information.
 
@@ -118,3 +121,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 For any questions or suggestions, please contact us at support@recyclify.com.
 
 ---
+
+Feel free to modify any part as necessary!
