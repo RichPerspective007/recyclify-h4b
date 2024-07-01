@@ -10,7 +10,7 @@ Recyclify is a green technology application designed to streamline the process o
 - [Anurag Bhattacharjee](https://github.com/anuragbhattacharjee)
 - [Promit Chaudhuri](https://github.com/promitchaudhuri)
 - [Shivaditya Bhattacharya](https://github.com/shivadityabhattacharya)
-- [Sankhadeep Bhowmick](https://github.com/sankhadeepbhowmick)
+- [Sankhadeep Bhowmik](https://github.com/Sankhadeep-Bhowmik)
 
 ## Features
 - **Find Recycling Centers**: Locate nearby electronics recycling centers.
