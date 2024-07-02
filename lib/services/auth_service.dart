@@ -18,7 +18,7 @@ class AuthService {
         password: password,
       );
 
-      if (credential.user != null) {
+      if (credential.user!= null) {
         _user = credential.user;
         return true;
       }
@@ -35,7 +35,7 @@ class AuthService {
         password: password,
       );
 
-      if (credential.user != null) {
+      if (credential.user!= null) {
         _user = credential.user;
         return true;
       }

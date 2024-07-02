@@ -21,17 +21,13 @@ class DeviceCard extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            GestureDetector(
-              onTap: (){},
-              
-              child: Container(
-                height: 200,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(8.0)
-                  ),
-                  child: Image.asset(device.imgUrl),
+            Container(
+              height: 250,
+              child: ClipRRect(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(10.0)
                 ),
+              child: Image.asset(device.imgUrl),
               ),
             ),
             ListTile(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:recyclify/components/device_list.dart';
 import 'package:recyclify/components/donationscreen.dart';
 import 'package:recyclify/components/profilescreen.dart';
@@ -10,7 +11,7 @@ import 'models/device_categories.dart';
 import 'services/auth_service.dart';
 import 'services/alert_service.dart';
 import 'services/navigation_service.dart';
-import 'components/theme_button.dart'; 
+import 'components/theme_button.dart';
 import 'components/color_button.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -33,6 +34,8 @@ class _HomeScreenState extends State<HomeScreen> {
   AlertService _alertService = AlertService();
   GetIt _getIt = GetIt.instance;
   NavigationService _navigationService = NavigationService();
+  String userName = '';
+  double _welcomeOpacity = 0.0;
 
   @override
   void initState() {
@@ -40,6 +43,16 @@ class _HomeScreenState extends State<HomeScreen> {
     _authService = _getIt.get<AuthService>();
     _navigationService = _getIt.get<NavigationService>();
     _alertService = _getIt.get<AlertService>();
+
+    // Retrieve the user's name
+    userName = _authService.user?.displayName ?? '';
+
+    // Delay to animate the 'Welcome' text
+    Future.delayed(Duration(milliseconds: 100), () {
+      setState(() {
+        _welcomeOpacity = 1.0;
+      });
+    });
   }
 
   List<NavigationDestination> navBarDestinations = [
@@ -80,15 +93,15 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(
           'ReCyclify',
-          style: Theme.of(context).textTheme.titleLarge,
+          style: GoogleFonts.recursive(
+            fontSize: 25,
+            fontWeight: FontWeight.w500,
+            color: Colors.blueAccent,
+          ),
         ),
         actions: [
           ThemeButton(
             changeThemeMode: widget.changeTheme,
-          ),
-          ColorButton(
-            changeColor: widget.changeColor,
-            colorSelected: widget.colorSelected,
           ),
           IconButton(
             onPressed: () async {
@@ -105,13 +118,72 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: IndexedStack(
-        index: tab,
-        children: pages,
+      backgroundColor: Colors.lightBlueAccent,  // Set background color here
+      body: Column(
+        children: [
+          if (tab == 0) ...[
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: AnimatedOpacity(
+                opacity: _welcomeOpacity,
+                duration: Duration(milliseconds: 1000),
+                child: Text(
+                  'W e l c o m e !',
+                  style: GoogleFonts.robotoSlab(
+                    fontSize: 45,
+                    fontWeight: FontWeight.bold,
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(2.0),
+              
+              child: Text(
+                "John Doe",
+                style: GoogleFonts.recursive(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 152, 255, 120),
+                ),
+              ),
+            ),
+            SizedBox(height: 10,),
+            Center(
+              child: Text(
+                "Choose your device :-",
+                style: GoogleFonts.recursive(
+                  fontSize: 25,
+                  fontWeight: FontWeight.normal,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                _authService.user != null ? _authService.user!.displayName ?? '' : '',
+                style: GoogleFonts.recursive(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: const Color.fromARGB(255, 255, 255, 255),
+                ),
+              ),
+            ),
+          ],
+          Expanded(
+            child: IndexedStack(
+              index: tab,
+              children: pages,
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: NavigationBar(
+        backgroundColor: const Color.fromARGB(255, 115, 255, 0),  // Set navigation bar color here
         selectedIndex: tab,
-        animationDuration: const Duration(milliseconds: 1000),
+        animationDuration: const Duration(milliseconds: 100),
         onDestinationSelected: (index) {
           setState(() {
             tab = index;
