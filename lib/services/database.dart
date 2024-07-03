@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get_it/get_it.dart';
 import 'package:recyclify/models/chat.dart';
@@ -25,16 +24,16 @@ class DatabaseService {
   void _setupCollectionReferences() {
     _userscollection =
         _firebaseFirestore.collection('users').withConverter<UserProfile>(
-              fromFirestore: (snapshots, _) => UserProfile.fromJson(
-                snapshots.data()!,
-              ),
-              toFirestore: (UserProfile userProfile, _) => userProfile.toJson(),
-            );
+          fromFirestore: (snapshots, _) => UserProfile.fromJson(
+            snapshots.data()!,
+          ),
+          toFirestore: (UserProfile userProfile, _) => userProfile.toJson(),
+        );
     _chatsCollection = _firebaseFirestore
         .collection('chats')
         .withConverter<Chat>(
-            fromFirestore: (snapshots, _) => Chat.fromJson(snapshots.data()!),
-            toFirestore: (chat, _) => chat.toJson());
+          fromFirestore: (snapshots, _) => Chat.fromJson(snapshots.data()!),
+          toFirestore: (chat, _) => chat.toJson());
   }
 
   Future<void> createUserProfile({required UserProfile userProfile}) async {
@@ -67,24 +66,40 @@ class DatabaseService {
     await docRef.set(chat);
   }
 
-
-
-  Future<void> sendChatMessage(
-      String uid1, String uid2, Message message) async {
+  Stream<DocumentSnapshot<Chat>> getChatData(String uid1, String uid2) {
     String chatID = generateChatID(uid1: uid1, uid2: uid2);
-    final docRef = _chatsCollection!.doc(chatID);
-    await docRef.update({
-      "messages": FieldValue.arrayUnion([
-        message.toJson(),
-      ]),
-    });
+    return _chatsCollection?.doc(chatID).snapshots()
+        as Stream<DocumentSnapshot<Chat>>;
   }
 
+  Future<void> storeDeviceData({
+    required String? selectedRAM,
+    required String? selectedSSD,
+    required String? selectedHDD,
+    required String? selectedGPU,
+    required String? selectedWarranty,
+    required String? selectedOS,
+    required String age,
+    String? selectedworkingCondition,
+    String? scratches,
+    required String? batteryCondition, // Now marked as required
+  }) async {
+    CollectionReference deviceDataCollection = _firebaseFirestore.collection('device_data');
 
+    Map<String, dynamic> deviceData = {
+      'selectedRAM': selectedRAM ?? 'N/A',
+      'selectedSSD': selectedSSD ?? 'N/A',
+      'selectedHDD': selectedHDD ?? 'N/A',
+      'selectedGPU': selectedGPU ?? 'N/A',
+      'selectedWarranty': selectedWarranty ?? 'N/A',
+      'selectedOS': selectedOS ?? 'N/A',
+      'age': age,
+      'selectedworkingCondition': selectedworkingCondition ?? 'N/A',
+      'batteryCondition': batteryCondition ?? '', // Empty string instead of 'N/A'
+    };
 
- Stream<DocumentSnapshot<Chat>>getChatData(String uid1, String uid2) {
-    String chatID = generateChatID(uid1: uid1, uid2: uid2);
-    return _chatsCollection?.doc(chatID).snapshots() 
-    as Stream<DocumentSnapshot<Chat>>;
+    await deviceDataCollection.add(deviceData);
   }
+
+  sendChatMessage(String id, String id2, Message message) {}
 }

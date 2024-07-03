@@ -40,9 +40,9 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
         },
         icon: const Icon(
           Icons.arrow_drop_down_circle_outlined,
-          color: Color.fromARGB(255, 23, 225, 168),
+          color: Color.fromARGB(255, 23, 164, 225),
         ),
-        dropdownColor: const Color.fromARGB(255, 67, 255, 202),
+        dropdownColor: Color.fromARGB(255, 48, 248, 241),
         decoration: InputDecoration(
           border: const UnderlineInputBorder(),
           labelText: '${widget.part} size in GB',

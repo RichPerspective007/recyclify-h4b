@@ -19,6 +19,10 @@ class _LapDeskFormState extends State<LapDeskForm> {
   String? selectedGPU;
   String? selectedWarranty;
   String? selectedOS;
+  String? selectedworkingCondition;
+  
+  String? batteryCondition;
+
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +85,27 @@ class _LapDeskFormState extends State<LapDeskForm> {
             });
           },
         ),
-        const SizedBox(height: 20),
+        CustomDropDownField(
+          part: 'Working condition',
+          sizeList: ['please select','broken', 'not working', 'partially working', 'working with lags', 'working perfectly',],
+          onChanged: (value) {
+            setState(() {
+              selectedworkingCondition = value;
+            });
+          },
+        ),
+        
+
+        CustomDropDownField(
+          part: 'Battery condition',
+          sizeList: ['please select','dead', '50 percent', '75 percent', 'no issues', ],
+          onChanged: (value) {
+            setState(() {
+              batteryCondition = value;
+            });
+          },
+        ),
+        const SizedBox(height: 15),
         ElevatedButton(
           onPressed: () {
             Navigator.push(
@@ -94,7 +118,10 @@ class _LapDeskFormState extends State<LapDeskForm> {
                   selectedGPU: selectedGPU,
                   selectedWarranty: selectedWarranty,
                   selectedOS: selectedOS,
+                  selectedworkingCondition:selectedworkingCondition,
                   age: age.text,
+                  batteryCondition:batteryCondition,
+                  
                 ),
               ),
             );
