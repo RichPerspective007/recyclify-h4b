@@ -152,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 10,),
             Center(
               child: Text(
-                "Choose your device :-",
+                "Choose your device",
                 style: GoogleFonts.recursive(
                   fontSize: 25,
                   fontWeight: FontWeight.normal,

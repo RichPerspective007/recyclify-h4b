@@ -21,7 +21,7 @@ class _PhoneTabFormState extends State<PhoneTabForm> {
         shrinkWrap: true,
         children: [
           CustomTextField(inputLabel: 'Age of the device', controller: age),
-          CustomDropDownField(part: 'RAM', sizeList: ['2','3','4','8','12','16','24','32','64']),
+          CustomDropDownField(part: 'RAM', sizeList: ['2','3','4','8','12','16','24','32','64'], onChanged: (value) {  },),
         ],
       );
   }
