@@ -1,26 +1,29 @@
 class UserProfile {
-  String? uid;
-  String? name;
-  String? pfpURL;
+  final String uid;
+  final String name;
+  final String? profilePictureUrl;
 
   UserProfile({
     required this.uid,
     required this.name,
-    required this.pfpURL,
+    this.profilePictureUrl,
   });
 
-  UserProfile.fromJson(Map<String, dynamic> json) {
-    uid = json['uid'];
-    name = json['name'];
-    pfpURL = json['pfpURL'];
+  factory UserProfile.fromJson(Map<String, dynamic> json) {
+    return UserProfile(
+      uid: json['uid'],
+      name: json['name'],
+      profilePictureUrl: json['profilePictureUrl'],
+    );
   }
+
+  get pfpURL => null;
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['uid'] = uid;
-    data['name'] = name;
-    data['pfpURL'] = pfpURL;
-    return data;
+    return {
+      'uid': uid,
+      'name': name,
+      'profilePictureUrl': profilePictureUrl,
+    };
   }
-
 }

@@ -52,12 +52,13 @@ class _HomeScreenState extends State<HomeScreen> {
     _fetchUserName();
 
     // Delay to animate the 'Welcome' text
-    Future.delayed(Duration(milliseconds: 100), () {
+    Future.delayed(Duration(milliseconds: 200), () {
       setState(() {
         _welcomeOpacity = 1.0;
       });
     });
   }
+  
 
   Future<void> _fetchUserName() async {
     final userProfile = await _databaseService.getUserProfile(_authService.user!.uid);
