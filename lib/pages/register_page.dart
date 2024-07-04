@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -135,7 +134,12 @@ class _RegisterPageState extends State<RegisterPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             _pfpSelectionField(),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
+            Text(
+              'Note: The first letter should be capital',
+              style: TextStyle(color: Colors.white, fontSize: 12),
+              textAlign: TextAlign.center,
+            ),
             CustomFormField(
               hintText: "Name",
               height: MediaQuery.sizeOf(context).height * 0.1,
@@ -146,6 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
               },
             ),
+            
             CustomFormField(
               hintText: "E-mail",
               height: MediaQuery.sizeOf(context).height * 0.1,
@@ -167,7 +172,12 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
               },
             ),
-            SizedBox(height: 20),
+            Text(
+              'Note: Must contain 8 letters with at least one capital, one small, one digit, and one special character',
+              style: TextStyle(color: Colors.white, fontSize: 12),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 10),
             _registerButton(),
           ],
         ),
@@ -194,85 +204,85 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
- Widget _registerButton() {
-  return SizedBox(
-    height: 45,
-    width: MediaQuery.of(context).size.width,
-    child: MaterialButton(
-      color: Color.fromARGB(255, 252, 180, 85),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      onPressed: () async {
-        setState(() {
-          isLoading = true;
-        });
-        try {
-          if (_registerFormKey.currentState?.validate() ?? false) {
-            if (selectedImage == null) {
-              throw Exception("Please select a profile picture");
-            }
-            _registerFormKey.currentState?.save();
+  Widget _registerButton() {
+    return SizedBox(
+      height: 45,
+      width: MediaQuery.of(context).size.width,
+      child: MaterialButton(
+        color: Color.fromARGB(255, 252, 180, 85),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        onPressed: () async {
+          setState(() {
+            isLoading = true;
+          });
+          try {
+            if (_registerFormKey.currentState?.validate() ?? false) {
+              if (selectedImage == null) {
+                throw Exception("Please select a profile picture");
+              }
+              _registerFormKey.currentState?.save();
 
-            // Check if the email is already in use
-            /*bool emailAlreadyInUse = await _authService.isEmailInUse(email!);
+              // Check if the email is already in use
+              /*bool emailAlreadyInUse = await _authService.isEmailInUse(email!);
             if (emailAlreadyInUse) {
               throw Exception("Email already in use");
             }*/
 
-            // Create the user account
-            bool result = await _authService.signup(email!, password!);
-            if (result) {
-              // Handle successful registration
-              String? pfpURL = await _storageService.uploadUserPfp(
-                file: selectedImage!,
-                uid: _authService.user!.uid,
-              );
-              if (pfpURL != null) {
-                await _databaseService.createUserProfile(
-                  userProfile: UserProfile(
-                    uid: _authService.user!.uid,
-                    name: name,
-                    pfpURL: pfpURL,
-                  ),
+              // Create the user account
+              bool result = await _authService.signup(email!, password!);
+              if (result) {
+                // Handle successful registration
+                String? pfpURL = await _storageService.uploadUserPfp(
+                  file: selectedImage!,
+                  uid: _authService.user!.uid,
                 );
-                _alertService.showToast(
-                  text: "User Registered Successfully",
-                  icon: Icons.check,
-                );
-                _navigationService.pushReplacementNamed("/login");
-                //_navigationService.pushReplacementNamed("/home");
+                if (pfpURL != null) {
+                  await _databaseService.createUserProfile(
+                    userProfile: UserProfile(
+                      uid: _authService.user!.uid,
+                      name: name,
+                      pfpURL: pfpURL,
+                    ),
+                  );
+                  _alertService.showToast(
+                    text: "User Registered Successfully",
+                    icon: Icons.check,
+                  );
+                  _navigationService.pushReplacementNamed("/login");
+                  //_navigationService.pushReplacementNamed("/home");
+                } else {
+                  throw Exception("Unable to upload user pfp!");
+                }
+                // print("registered successfully");
               } else {
-                throw Exception("Unable to upload user pfp!");
+                throw Exception("Unable to register user!");
               }
-              // print("registered successfully");
-            } else {
-              throw Exception("Unable to register user!");
             }
+          } catch (e) {
+            print(e);
+            _alertService.showToast(
+              text: "Registration failed, \n $e",
+              icon: Icons.error,
+            );
           }
-        } catch (e) {
-          print(e);
-          _alertService.showToast(
-            text: "Registration failed, \n $e",
-            icon: Icons.error,
-          );
-        }
 
-        setState(() {
-          isLoading = false;
-        });
-      },
-      child: const Text(
-        "SignUP",
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 21,
-          fontWeight: FontWeight.w900,
+          setState(() {
+            isLoading = false;
+          });
+        },
+        child: const Text(
+          "SignUP",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 21,
+            fontWeight: FontWeight.w900,
+          ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _LoginAccountLink() {
     return Center(

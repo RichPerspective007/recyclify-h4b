@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:recyclify/components/forgotpassword.dart';
@@ -91,8 +90,8 @@ class _LoginPageState extends State<LoginPage> {
             _headerText(),
             _loginForm(),
             _createAnAccountLink(),
-            SizedBox(height: 10,),
-             _forgotPassword(),
+            SizedBox(height: 10),
+            _forgotPassword(),
           ],
         ),
       ),
@@ -102,7 +101,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget _headerText() {
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
-      //height: MediaQuery.sizeOf(context).height,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -178,11 +176,14 @@ class _LoginPageState extends State<LoginPage> {
                         });
                       },
                     ),
-
-                    SizedBox(height: 40),
+                    //SizedBox(height: 10),
+                    Text(
+                      'Must contain 8 letters with at least one capital, one small, one digit, and one special character',
+                      style: TextStyle(color: Colors.white, fontSize: 12),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 10),
                     _loginButton(),
-                    //SizedBox(height: 20),
-                    
                   ],
                 ),
               ),
@@ -204,7 +205,6 @@ class _LoginPageState extends State<LoginPage> {
             if (_loginFormKey.currentState?.validate() ?? false) {
               _loginFormKey.currentState?.save();
               bool result = await _authService.login(email!, password!);
-              print('Result = {result}');
               if (result) {
                 _navigationService.pushReplacementNamed('/home');
               } else {

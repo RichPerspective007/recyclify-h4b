@@ -12,6 +12,7 @@ import 'package:recyclify/services/database.dart';
 import 'package:recyclify/services/auth_service.dart';
 import 'package:recyclify/services/navigation_service.dart';
 import 'package:recyclify/utils.dart';
+import 'package:recyclify/pages/splash_screen.dart'; // Import the SplashScreen
 
 void main() async {
   await setup();
@@ -41,7 +42,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   ThemeMode themeMode = ThemeMode.light; 
  // Manual theme toggle
   ColorSelection colorSelected = ColorSelection.pink;
@@ -77,14 +77,15 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         brightness: Brightness.dark,
       ),
-      initialRoute: widget._authService.user != null ? "/home": "/login", 
+      initialRoute: "/splash", 
       routes: {
+        "/splash": (context) => SplashScreen(),
         "/login": (context) => LoginPage(),
-        "/home": (context) => HomeScreen(changeTheme: changeThemeMode,changeColor: changeColor,colorSelected: colorSelected,),
+        "/home": (context) => HomeScreen(changeTheme: changeThemeMode, changeColor: changeColor, colorSelected: colorSelected,),
         "/register": (context) => RegisterPage(),
         "/settings": (context) => Settings(),
         '/date_time': (context) => Date_Time(), 
-      }, // Add this
+      },
     );
   }
 }

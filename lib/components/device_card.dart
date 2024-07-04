@@ -22,7 +22,7 @@ class DeviceCard extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: 250,
+              height: 180,
               child: ClipRRect(
                 borderRadius: BorderRadius.vertical(
                   top: Radius.circular(10.0)

@@ -25,6 +25,7 @@ class HomeScreen extends StatefulWidget {
   final void Function(bool useLightMode) changeTheme;
   final void Function(int value) changeColor;
   final ColorSelection colorSelected;
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -118,67 +119,73 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      backgroundColor: Colors.lightBlueAccent,  // Set background color here
-      body: Column(
-        children: [
-          if (tab == 0) ...[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: AnimatedOpacity(
-                opacity: _welcomeOpacity,
-                duration: Duration(milliseconds: 1000),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/background_home.jpg"), // Path to your background image
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          children: [
+            if (tab == 0) ...[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: AnimatedOpacity(
+                  opacity: _welcomeOpacity,
+                  duration: Duration(milliseconds: 1000),
+                  child: Text(
+                    'W e l c o m e !',
+                    style: GoogleFonts.robotoSlab(
+                      fontSize: 45,
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromARGB(255, 255, 255, 255),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(),
                 child: Text(
-                  'W e l c o m e !',
-                  style: GoogleFonts.robotoSlab(
-                    fontSize: 45,
+                  "John Doe",
+                  style: GoogleFonts.aclonica(
+                    fontSize: 80,
+                    fontWeight: FontWeight.w400,
+                    color: Color.fromARGB(255, 255, 223, 62),
+                  ),
+                ),
+              ),
+              SizedBox(height: 10),
+              Center(
+                child: Text(
+                  "Choose your device",
+                  style: GoogleFonts.recursive(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  _authService.user != null ? _authService.user!.displayName ?? '' : '',
+                  style: GoogleFonts.recursive(
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                     color: const Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(2.0),
-              
-              child: Text(
-                "John Doe",
-                style: GoogleFonts.recursive(
-                  fontSize: 50,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 152, 255, 120),
-                ),
-              ),
-            ),
-            SizedBox(height: 10,),
-            Center(
-              child: Text(
-                "Choose your device",
-                style: GoogleFonts.recursive(
-                  fontSize: 25,
-                  fontWeight: FontWeight.normal,
-                  color: Color.fromARGB(255, 255, 255, 255),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                _authService.user != null ? _authService.user!.displayName ?? '' : '',
-                style: GoogleFonts.recursive(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: const Color.fromARGB(255, 255, 255, 255),
-                ),
+            ],
+            Expanded(
+              child: IndexedStack(
+                index: tab,
+                children: pages,
               ),
             ),
           ],
-          Expanded(
-            child: IndexedStack(
-              index: tab,
-              children: pages,
-            ),
-          ),
-        ],
+        ),
       ),
       bottomNavigationBar: NavigationBar(
         backgroundColor: const Color.fromARGB(255, 115, 255, 0),  // Set navigation bar color here
@@ -190,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
           });
         },
         destinations: navBarDestinations,
-        indicatorShape: const CircleBorder(eccentricity: 0),
+        indicatorShape: const CircleBorder(),
       ),
     );
   }
