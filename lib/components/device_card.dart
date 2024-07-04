@@ -18,6 +18,7 @@ class DeviceCard extends StatelessWidget {
       },
       child: Card(
         elevation: 2.0,
+        color: Color.fromARGB(150, 250, 250, 250),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -31,7 +32,10 @@ class DeviceCard extends StatelessWidget {
               ),
             ),
             ListTile(
-              title: Text(device.type, style: Theme.of(context).textTheme.titleMedium,),
+              title: Text(device.type, style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20
+              ), textAlign: TextAlign.center,),
               titleAlignment: ListTileTitleAlignment.center,
             )
           ],
