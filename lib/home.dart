@@ -5,6 +5,7 @@ import 'package:recyclify/components/device_list.dart';
 import 'package:recyclify/components/donationscreen.dart';
 import 'package:recyclify/components/profilescreen.dart';
 import 'package:recyclify/components/settings.dart';
+import 'package:recyclify/main.dart';
 import 'package:recyclify/models/colors.dart';
 import 'package:recyclify/services/database.dart';
 import 'models/device_categories.dart';
@@ -67,7 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  List<NavigationDestination> navBarDestinations = [
+  List<NavigationDestination> navBarDestinations = const [
     NavigationDestination(
       icon: Icon(Icons.home_outlined),
       label: 'Home',
@@ -190,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        backgroundColor: const Color.fromARGB(255, 115, 255, 0),  // Set navigation bar color here
+        backgroundColor: (globalThemeModeVar == ThemeMode.light)?const Color.fromARGB(255, 115, 255, 0):Color.fromARGB(255, 13, 27, 2),  // Set navigation bar color here
         selectedIndex: tab,
         animationDuration: const Duration(milliseconds: 100),
         onDestinationSelected: (index) {

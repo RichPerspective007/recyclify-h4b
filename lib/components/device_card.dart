@@ -25,14 +25,14 @@ class DeviceCard extends StatelessWidget {
             Container(
               height: 180,
               child: ClipRRect(
-                borderRadius: BorderRadius.vertical(
+                borderRadius: const BorderRadius.vertical(
                   top: Radius.circular(10.0)
                 ),
               child: Image.asset(device.imgUrl),
               ),
             ),
             ListTile(
-              title: Text(device.type, style: TextStyle(
+              title: Text(device.type, style: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20
               ), textAlign: TextAlign.center,),

@@ -14,6 +14,8 @@ import 'package:recyclify/services/navigation_service.dart';
 import 'package:recyclify/utils.dart';
 import 'package:recyclify/pages/splash_screen.dart'; // Import the SplashScreen
 
+ThemeMode globalThemeModeVar = ThemeMode.light;
+
 void main() async {
   await setup();
   runApp(
@@ -42,7 +44,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  ThemeMode themeMode = ThemeMode.light; 
+  ThemeMode themeMode = ThemeMode.light;
  // Manual theme toggle
   ColorSelection colorSelected = ColorSelection.pink;
 
@@ -51,6 +53,7 @@ class _MyAppState extends State<MyApp> {
       themeMode = useLightMode
       ? ThemeMode.light 
       : ThemeMode.dark;
+      globalThemeModeVar = themeMode;
     });
   } 
   void changeColor(int value) {
