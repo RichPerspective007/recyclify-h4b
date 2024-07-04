@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: 10),
               Center(
                 child: Text(
-                  "Choose your device",
+                  "Choose your device:",
                   style: GoogleFonts.recursive(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -166,17 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  _authService.user != null ? _authService.user!.displayName ?? '' : '',
-                  style: GoogleFonts.recursive(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 255, 255, 255),
-                  ),
-                ),
-              ),
+              
             ],
             Expanded(
               child: IndexedStack(
