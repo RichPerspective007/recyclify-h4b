@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
   AlertService _alertService = AlertService();
   GetIt _getIt = GetIt.instance;
   NavigationService _navigationService = NavigationService();
+  DatabaseService _databaseService = DatabaseService();
   String userName = '';
   double _welcomeOpacity = 0.0;
 
@@ -44,9 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _authService = _getIt.get<AuthService>();
     _navigationService = _getIt.get<NavigationService>();
     _alertService = _getIt.get<AlertService>();
+    _databaseService = _getIt.get<DatabaseService>();
 
-    // Retrieve the user's name
-    userName = _authService.user?.displayName ?? '';
+    // Retrieve the user's profile and name
+    _fetchUserName();
 
     // Delay to animate the 'Welcome' text
     Future.delayed(Duration(milliseconds: 100), () {
@@ -54,6 +56,15 @@ class _HomeScreenState extends State<HomeScreen> {
         _welcomeOpacity = 1.0;
       });
     });
+  }
+
+  Future<void> _fetchUserName() async {
+    final userProfile = await _databaseService.getUserProfile(_authService.user!.uid);
+    if (userProfile != null) {
+      setState(() {
+        userName = userProfile.name!;
+      });
+    }
   }
 
   List<NavigationDestination> navBarDestinations = [
@@ -146,19 +157,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(),
-                child: Text(
-                  "John Doe",
-                  style: GoogleFonts.aclonica(
-                    fontSize: 80,
-                    fontWeight: FontWeight.w400,
-                    color: Color.fromARGB(255, 255, 223, 62),
+                child: Center(
+                  child: Text(
+                    userName,
+                    style: GoogleFonts.aclonica(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w400,
+                      color: Color.fromARGB(255, 255, 223, 62),
+                    ),
                   ),
                 ),
               ),
               SizedBox(height: 10),
               Center(
                 child: Text(
-                  "Choose your device:",
+                  "Choose your device: ",
                   style: GoogleFonts.recursive(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -166,7 +179,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               ),
-              
             ],
             Expanded(
               child: IndexedStack(

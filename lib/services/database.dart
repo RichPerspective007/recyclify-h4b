@@ -13,7 +13,6 @@ class DatabaseService {
 
   late CollectionReference<UserProfile> _userscollection;
 
-  //CollectionReference? _userscollection;
   CollectionReference? _chatsCollection;
 
   DatabaseService() {
@@ -99,6 +98,14 @@ class DatabaseService {
     };
 
     await deviceDataCollection.add(deviceData);
+  }
+
+  Future<UserProfile?> getUserProfile(String uid) async {
+    final userProfileDoc = await _userscollection.doc(uid).get();
+    if (userProfileDoc.exists) {
+      return userProfileDoc.data();
+    }
+    return null;
   }
 
   sendChatMessage(String id, String id2, Message message) {}
