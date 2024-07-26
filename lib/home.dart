@@ -5,6 +5,7 @@ import 'package:recyclify/components/device_list.dart';
 import 'package:recyclify/components/donationscreen.dart';
 import 'package:recyclify/components/profilescreen.dart';
 import 'package:recyclify/components/settings.dart';
+import 'package:recyclify/main.dart';
 import 'package:recyclify/models/colors.dart';
 import 'package:recyclify/services/database.dart';
 import 'models/device_categories.dart';
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   AlertService _alertService = AlertService();
   GetIt _getIt = GetIt.instance;
   NavigationService _navigationService = NavigationService();
+  DatabaseService _databaseService = DatabaseService();
   String userName = '';
   double _welcomeOpacity = 0.0;
 
@@ -44,19 +46,30 @@ class _HomeScreenState extends State<HomeScreen> {
     _authService = _getIt.get<AuthService>();
     _navigationService = _getIt.get<NavigationService>();
     _alertService = _getIt.get<AlertService>();
+    _databaseService = _getIt.get<DatabaseService>();
 
-    // Retrieve the user's name
-    userName = _authService.user?.displayName ?? '';
+    // Retrieve the user's profile and name
+    _fetchUserName();
 
     // Delay to animate the 'Welcome' text
-    Future.delayed(Duration(milliseconds: 100), () {
+    Future.delayed(Duration(milliseconds: 200), () {
       setState(() {
         _welcomeOpacity = 1.0;
       });
     });
   }
+  
 
-  List<NavigationDestination> navBarDestinations = [
+  Future<void> _fetchUserName() async {
+    final userProfile = await _databaseService.getUserProfile(_authService.user!.uid);
+    if (userProfile != null) {
+      setState(() {
+        userName = userProfile.name!;
+      });
+    }
+  }
+
+  List<NavigationDestination> navBarDestinations = const [
     NavigationDestination(
       icon: Icon(Icons.home_outlined),
       label: 'Home',
@@ -146,34 +159,25 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(),
-                child: Text(
-                  "John Doe",
-                  style: GoogleFonts.aclonica(
-                    fontSize: 80,
-                    fontWeight: FontWeight.w400,
-                    color: Color.fromARGB(255, 255, 223, 62),
+                child: Center(
+                  child: Text(
+                    userName,
+                    style: GoogleFonts.aclonica(
+                      fontSize: 40,
+                      fontWeight: FontWeight.w400,
+                      color: Color.fromARGB(255, 255, 223, 62),
+                    ),
                   ),
                 ),
               ),
               SizedBox(height: 10),
               Center(
                 child: Text(
-                  "Choose your device",
+                  "Choose your device: ",
                   style: GoogleFonts.recursive(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
                     color: Color.fromARGB(255, 255, 255, 255),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  _authService.user != null ? _authService.user!.displayName ?? '' : '',
-                  style: GoogleFonts.recursive(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
               ),
@@ -188,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       bottomNavigationBar: NavigationBar(
-        backgroundColor: const Color.fromARGB(255, 115, 255, 0),  // Set navigation bar color here
+        backgroundColor: (globalThemeModeVar == ThemeMode.light)?const Color.fromARGB(255, 115, 255, 0):Color.fromARGB(255, 13, 27, 2),  // Set navigation bar color here
         selectedIndex: tab,
         animationDuration: const Duration(milliseconds: 100),
         onDestinationSelected: (index) {

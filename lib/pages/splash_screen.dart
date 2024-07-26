@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _navigateToLogin() async {
-    await Future.delayed(Duration(milliseconds: 660), () {});
+    await Future.delayed(Duration(milliseconds: 1000), () {});
     Navigator.pushReplacement(
       context,
       PageRouteBuilder(
@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
             child: child,
           );
         },
-        transitionDuration: Duration(milliseconds: 800),
+        transitionDuration: Duration(milliseconds: 1200),
       ),
     );
   }

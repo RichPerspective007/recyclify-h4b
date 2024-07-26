@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -90,7 +89,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Widget _headerText() {
     return SizedBox(
-      width: MediaQuery.sizeOf(context).width,
+      width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -150,7 +149,6 @@ class _RegisterPageState extends State<RegisterPage> {
                 });
               },
             ),
-            
             CustomFormField(
               hintText: "E-mail",
               height: MediaQuery.sizeOf(context).height * 0.1,
@@ -224,16 +222,8 @@ class _RegisterPageState extends State<RegisterPage> {
               }
               _registerFormKey.currentState?.save();
 
-              // Check if the email is already in use
-              /*bool emailAlreadyInUse = await _authService.isEmailInUse(email!);
-            if (emailAlreadyInUse) {
-              throw Exception("Email already in use");
-            }*/
-
-              // Create the user account
               bool result = await _authService.signup(email!, password!);
               if (result) {
-                // Handle successful registration
                 String? pfpURL = await _storageService.uploadUserPfp(
                   file: selectedImage!,
                   uid: _authService.user!.uid,
@@ -242,8 +232,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   await _databaseService.createUserProfile(
                     userProfile: UserProfile(
                       uid: _authService.user!.uid,
-                      name: name,
-                      pfpURL: pfpURL,
+                      name: name!,
+                      profilePictureUrl: pfpURL,
                     ),
                   );
                   _alertService.showToast(
@@ -251,11 +241,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     icon: Icons.check,
                   );
                   _navigationService.pushReplacementNamed("/login");
-                  //_navigationService.pushReplacementNamed("/home");
                 } else {
-                  throw Exception("Unable to upload user pfp!");
+                  throw Exception("Unable to upload user profile picture!");
                 }
-                // print("registered successfully");
               } else {
                 throw Exception("Unable to register user!");
               }
@@ -273,7 +261,7 @@ class _RegisterPageState extends State<RegisterPage> {
           });
         },
         child: const Text(
-          "SignUP",
+          "SignUp",
           style: TextStyle(
             color: Colors.white,
             fontSize: 21,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:recyclify/main.dart';
 
 class CustomDropDownField extends StatefulWidget {
   final List<String> sizeList;
@@ -42,7 +44,7 @@ class _CustomDropDownFieldState extends State<CustomDropDownField> {
           Icons.arrow_drop_down_circle_outlined,
           color: Color.fromARGB(255, 23, 164, 225),
         ),
-        dropdownColor: Color.fromARGB(255, 48, 248, 241),
+        dropdownColor: globalThemeModeVar==ThemeMode.light?Colors.white:Colors.black,
         decoration: InputDecoration(
           border: const UnderlineInputBorder(),
           labelText: '${widget.part} size in GB',
