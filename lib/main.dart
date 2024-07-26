@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:recyclify/OwnerHome.dart';
 import 'package:recyclify/components/settings.dart';
 import 'package:recyclify/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:recyclify/models/colors.dart';
+import 'package:recyclify/pages/OwnerPage.dart';
+import 'package:recyclify/pages/confirmation.dart';
+import 'package:recyclify/pages/confirmationPage.dart';
 import 'package:recyclify/pages/date&time.dart';
 import 'package:recyclify/pages/login_page.dart';
 import 'package:recyclify/pages/register_page.dart';
@@ -77,14 +81,15 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         brightness: Brightness.dark,
       ),
-      initialRoute: "/splash", 
+      initialRoute: "/splash",
       routes: {
-        "/splash": (context) => SplashScreen(),
+        "/splash": (context) => ConfirmationPAge(),
         "/login": (context) => LoginPage(),
         "/home": (context) => HomeScreen(changeTheme: changeThemeMode, changeColor: changeColor, colorSelected: colorSelected,),
         "/register": (context) => RegisterPage(),
         "/settings": (context) => Settings(),
         '/date_time': (context) => Date_Time(), 
+        "/OwnerHome":(context)=> OwnerHome(),
       },
     );
   }
