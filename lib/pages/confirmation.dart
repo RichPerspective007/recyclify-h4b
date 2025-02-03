@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-// Import the DatabaseService
 import 'package:recyclify/services/database.dart';
+import 'package:recyclify/components/nearby_stores_map.dart';
 
 class ConfirmationPage extends StatelessWidget {
   final String? selectedRAM;
@@ -39,7 +39,9 @@ class ConfirmationPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            // Device Specifications Table
             Table(
               border: TableBorder.all(),
               children: [
@@ -133,7 +135,6 @@ class ConfirmationPage extends StatelessWidget {
                     child: Text(selectedworkingCondition ?? 'N/A'),
                   ),
                 ]),
-                
                 TableRow(children: [
                   const Padding(
                     padding: EdgeInsets.all(8.0),
@@ -146,6 +147,31 @@ class ConfirmationPage extends StatelessWidget {
                 ]),
               ],
             ),
+
+            const SizedBox(height: 20),
+            
+            // Map Section
+            const Text(
+              'Nearby Stores Offering Exchange/Sell Options:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: Colors.blue,
+              ),
+            ),
+            const SizedBox(height: 10),
+            
+            // Map Widget
+            Expanded(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: const NearbyStoresMap(),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+            
+            // Confirm Button
             ElevatedButton(
               onPressed: () async {
                 await databaseService.storeDeviceData(
@@ -157,18 +183,27 @@ class ConfirmationPage extends StatelessWidget {
                   selectedOS: selectedOS,
                   selectedworkingCondition: selectedworkingCondition,
                   age: age,
-                  
                   batteryCondition: batteryCondition,
                 );
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Device data stored successfully')),
+                  const SnackBar(
+                    content: Text('Device data stored successfully'),
+                    duration: Duration(seconds: 2),
+                  ),
                 );
               },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Colors.white,
-                backgroundColor: Colors.blue, // foreground (text) color
+                backgroundColor: Colors.blue,
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
-              child: const Text('Confirm'),
+              child: const Text(
+                'Confirm',
+                style: TextStyle(fontSize: 16),
+              ),
             ),
           ],
         ),
